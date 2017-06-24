@@ -1,0 +1,62 @@
+ <!DOCTYPE html>
+<html>
+  <head>
+    <title>User Component</title>
+    <base href="/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="user.component.css">
+
+    <!-- Polyfill(s) for older browsers -->
+    <script src="node_modules/core-js/client/shim.min.js"></script>
+
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+
+    <script src="systemjs.config.js"></script>
+    <script>
+      System.import('main.js').catch(function(err){ console.error(err); });
+    </script>
+  </head>
+
+  <body>
+            <DIV class="main">
+                <h1>{{name}}</h1><br>
+                <p><Strong>Email:</Strong>{{email}}</p>
+                <p><Strong>Address:</Strong>{{address.Street}},{{address.City}},{{address.PIN}}</p>
+                <button (click)="toggleShowHobbies ()">{{showHobbies? "Hide Hobbies":"Show Hobbies"}}</button>
+                <div *ngIf="showHobbies">
+                    <p><Strong>Hobbies:</Strong></p>
+                    <ul>
+                        <li *ngFor= "let hb of hobbies">
+                            {{hb}}
+                        </li>
+                    </ul>
+                </div>
+                <hr/>
+                <h3>Edit User Details</h3>
+                <form>
+                    <label>Name:</label>
+                    <input type="text" name="name"[(ngModel)]="name"><br>
+                    <label>Email:</label>
+                    <input type="text" name="email"[(ngModel)]="email"><br>
+                    <h3>Address:</h3>
+                    <label>Street:</label>
+                    <input type="text" name="address.Street"[(ngModel)]="address.Street"><br>
+                    <label>City:</label>
+                    <input type="text" name="address.City"[(ngModel)]="address.City"><br>
+                    <label>PIN:</label>
+                    <input type="text" name="address.PIN"[(ngModel)]="address.PIN">
+
+                </form>
+
+                <hr/>
+                <h3>Post</h3>
+                <div *ngFor="let post of posts">
+                    <h3>{{post.id}}</h3>
+                    <h3>{{post.title}}</h3>
+                    <p>{{post.body}}</p>
+                </div>
+            </DIV>  
+    </body>
+</html>
